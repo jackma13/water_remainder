@@ -40,8 +40,8 @@ class _HomenavigationState extends State<Homenavigation> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.access_time_filled,
                               size: 30,
                               color: Color(0xff9e9ea0),
@@ -58,8 +58,8 @@ class _HomenavigationState extends State<Homenavigation> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Icon(Icons.person,
+                          children: const [
+                            Icon(Icons.person,
                                 size: 30, color: Color(0xff9e9ea0)),
                             Text(
                               "Contacts",
@@ -73,8 +73,8 @@ class _HomenavigationState extends State<Homenavigation> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Icon(Icons.keyboard,
+                          children: const [
+                            Icon(Icons.keyboard,
                                 size: 30, color: Color(0xff9e9ea0)),
                             Text(
                               "Key pad",
@@ -88,8 +88,8 @@ class _HomenavigationState extends State<Homenavigation> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Icon(Icons.settings,
+                          children: const [
+                            Icon(Icons.settings,
                                 size: 30, color: Color(0xff9e9ea0)),
                             Text(
                               "Setting",

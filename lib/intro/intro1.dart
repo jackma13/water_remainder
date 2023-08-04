@@ -55,23 +55,11 @@ class _Intro1State extends State<Intro1> {
                 ],
               ),
             ),
-            InkWell(
-              onTap: () {
+            Buttton_Design(
+              ontap: () {
                 routes("/Intro2", context);
               },
-              child: Container(
-                padding: EdgeInsets.all(15),
-                width: widthD / 1.2,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: AppColors.bgcolor),
-                child: Center(
-                  child: Text(
-                    "Next",
-                    style: normaltext2,
-                  ),
-                ),
-              ),
+              text: 'Next',
             )
           ],
         ),
@@ -79,3 +67,4 @@ class _Intro1State extends State<Intro1> {
     );
   }
 }
+

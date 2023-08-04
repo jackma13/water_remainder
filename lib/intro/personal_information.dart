@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:horizontal_picker/horizontal_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class PersonalInformtion extends StatefulWidget {
@@ -10,106 +11,260 @@ class PersonalInformtion extends StatefulWidget {
 }
 
 class _PersonalInformtionState extends State<PersonalInformtion> {
-  DateTime _date = DateTime(2020, 11, 17);
-  double? newValue;
+  DateTime _date = DateTime.now();
+  String date2 = DateFormat('MM-dd-yyyy').format(DateTime.now()).toString();
 
   void _selectDate() async {
     final DateTime? newDate = await showDatePicker(
       context: context,
       initialDate: _date,
-      firstDate: DateTime(2017, 1),
-      lastDate: DateTime(2022, 7),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2030),
       helpText: 'Select a date',
     );
     if (newDate != null) {
       setState(() {
         _date = newDate;
+        date2 = DateFormat('MM-dd-yyyy').format(newDate);
       });
     }
-  }
-
-  void _selectweight() async {
-    showDialog(
-        context: context,
-        builder: (context) => SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Container(
-                width: 350,
-                height: 420,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Material(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      HorizontalPicker(
-                        minValue: -10,
-                        maxValue: 55,
-                        divisions: 600,
-                        height: 120,
-                        suffix: " cm",
-                        showCursor: false,
-                        backgroundColor: Colors.grey.shade900,
-                        activeItemTextColor: Colors.white,
-                        passiveItemsTextColor: Colors.amber,
-                        onChanged: (value) {
-                          setState(() {
-                            newValue = value;
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [
-        ElevatedButton(
-          onPressed: _selectDate,
-          child: const Text('SELECT DATE'),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Selected date: $_date',
-        ),
-        ElevatedButton(
-          onPressed: _selectweight,
-          child: const Text('SELECT Wight'),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Selected Wight: $newValue',
-        ),
-        ElevatedButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (_) {
-                  return SelectActivity();
-                });
-          },
-          child: const Text('SELECT Wight'),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Selected activity: $_sliderDiscreteValue',
-        ),
-        RaisedButton(onPressed: () {
-          routes("/SelectGender", context);
-        })
-      ]),
-    );
+        backgroundColor: const Color(0xffffc355),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: PhysicalModel(
+                color: Colors.transparent,
+                elevation: 10,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  width: widthD,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: heightD * 0.02,
+                      ),
+                      Text(
+                        "Personal Information",
+                        style: heading,
+                      ),
+                      SizedBox(
+                        height: heightD * 0.05,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Birthday",
+                              style: heading3,
+                            ),
+                            InkWell(
+                              onTap: _selectDate,
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      date2.toString(),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Weight",
+                              style: heading3,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return const SelectWeight();
+                                    });
+                                setState(() {});
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      _currentHorizontalIntValue.toString(),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Activity",
+                              style: heading3,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return const SelectActivity();
+                                    });
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    _sliderDiscreteValue == 0
+                                        ? "Low"
+                                        : _sliderDiscreteValue == 50.0
+                                            ? "Medium"
+                                            : _sliderDiscreteValue == 100.0
+                                                ? "High"
+                                                : "High",
+                                    style: heading2,
+                                  ),
+                                  const Icon(Icons.arrow_drop_down)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: heightD * 0.02,
+                      ),
+                      Buttton_Design(
+                          ontap: () {
+                            routes("/SelectGender", context);
+                          },
+                          text: "Next"),
+                      SizedBox(
+                        height: heightD * 0.04,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Image.asset(
+              "assets/img_14.jpg",
+              height: heightD / 2,
+            ),
+          ],
+        ));
+  }
+}
+
+int _currentHorizontalIntValue = 30;
+
+class SelectWeight extends StatefulWidget {
+  const SelectWeight({Key? key}) : super(key: key);
+
+  @override
+  State<SelectWeight> createState() => _SelectWeightState();
+}
+
+class _SelectWeightState extends State<SelectWeight> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+          child: Container(
+            width: widthD / 1.3,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Material(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: EdgeInsets.all(widthD * 0.03),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "Select Weight",
+                      style: heading,
+                    ),
+                    SizedBox(
+                      height: heightD * 0.05,
+                    ),
+                    Center(
+                      child: Text(
+                        "$_currentHorizontalIntValue KG",
+                        style: heading3,
+                      ),
+                    ),
+                    SizedBox(
+                      height: heightD * 0.02,
+                    ),
+                    NumberPicker(
+                      value: _currentHorizontalIntValue,
+                      minValue: 30,
+                      maxValue: 200,
+                      step: 1,
+                      itemHeight: 100,
+                      axis: Axis.horizontal,
+                      onChanged: (value) =>
+                          setState(() => _currentHorizontalIntValue = value),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.black26),
+                      ),
+                    ),
+                    SizedBox(
+                      height: heightD * 0.05,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancle")),
+                        TextButton(
+                            onPressed: () {
+                              routes("/PersonalInformtion", context);
+                            },
+                            child: const Text("Okay"))
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ));
   }
 }
 
@@ -129,8 +284,7 @@ class _SelectActivityState extends State<SelectActivity> {
         width: MediaQuery.of(context).size.width,
         child: Center(
           child: Container(
-            width: 350,
-            height: 420,
+            width: widthD / 1.3,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
@@ -138,11 +292,19 @@ class _SelectActivityState extends State<SelectActivity> {
             child: Material(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Expanded(
-                    child: Slider(
+              child: Padding(
+                padding: EdgeInsets.all(widthD * 0.03),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "Select Activicty",
+                      style: heading,
+                    ),
+                    SizedBox(
+                      height: heightD * 0.03,
+                    ),
+                    Slider(
                       value: _sliderDiscreteValue,
                       min: 0,
                       max: 100,
@@ -154,8 +316,34 @@ class _SelectActivityState extends State<SelectActivity> {
                         });
                       },
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text("Low"),
+                        Text("Medium"),
+                        Text("High")
+                      ],
+                    ),
+                    SizedBox(
+                      height: heightD * 0.03,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancle")),
+                        TextButton(
+                            onPressed: () {
+                              routes("/PersonalInformtion", context);
+                            },
+                            child: const Text("Okay"))
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

@@ -53,24 +53,11 @@ class _Intro2State extends State<Intro2> {
                 ],
               ),
             ),
-            InkWell(
-              onTap: () {
-                routes("/Selectplan", context);
-              },
-              child: Container(
-                padding: EdgeInsets.all(15),
-                width: widthD / 1.2,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: AppColors.bgcolor),
-                child: Center(
-                  child: Text(
-                    "Let's Go",
-                    style: normaltext2,
-                  ),
-                ),
-              ),
-            )
+            Buttton_Design(
+                ontap: () {
+                  routes("/Selectplan", context);
+                },
+                text: "Let's Go")
           ],
         ),
       ),
