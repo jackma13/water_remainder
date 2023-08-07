@@ -22,6 +22,17 @@ class _SelectTemperatureState extends State<SelectTemperature> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: EdgeInsets.all(widthD * 0.03),
+              child: Text(
+                "Temperature is a fector that affects your water needs",
+                textAlign: TextAlign.center,
+                style: normaltext,
+              ),
+            ),
+            SizedBox(
+              height: heightD * 0.02,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

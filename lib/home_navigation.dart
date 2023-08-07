@@ -22,6 +22,8 @@ class _HomenavigationState extends State<Homenavigation> {
 
   @override
   Widget build(BuildContext context) {
+    widthD = MediaQuery.of(context).size.width;
+    heightD = MediaQuery.of(context).size.height;
     return Scaffold(
       body: pages[pageIndex],
       bottomNavigationBar: BottomAppBar(
@@ -36,63 +38,106 @@ class _HomenavigationState extends State<Homenavigation> {
                     InkWell(
                         onTap: () {
                           pageIndex = 0;
+                          h1 = true;
+                          h2 = false;
+                          h3 = false;
+                          h4 = false;
                           setState(() {});
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
+                          children: [
                             Icon(
-                              Icons.access_time_filled,
+                              Icons.home,
                               size: 30,
-                              color: Color(0xff9e9ea0),
+                              color: h1
+                                  ? AppColors.bgcolor
+                                  : const Color(0xff9e9ea0),
                             ),
                             Text(
-                              "Recent",
+                              "Home",
+                              style: TextStyle(
+                                  color: h1
+                                      ? AppColors.bgcolor
+                                      : const Color(0xff9e9ea0)),
                             )
                           ],
                         )),
                     InkWell(
                         onTap: () {
                           pageIndex = 1;
+                          h1 = false;
+                          h2 = true;
+                          h3 = false;
+                          h4 = false;
                           setState(() {});
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Icon(Icons.person,
-                                size: 30, color: Color(0xff9e9ea0)),
+                          children: [
+                            Icon(Icons.access_time,
+                                size: 30,
+                                color: h2
+                                    ? AppColors.bgcolor
+                                    : const Color(0xff9e9ea0)),
                             Text(
-                              "Contacts",
+                              "Statistic",
+                              style: TextStyle(
+                                  color: h2
+                                      ? AppColors.bgcolor
+                                      : const Color(0xff9e9ea0)),
                             )
                           ],
                         )),
                     InkWell(
                         onTap: () {
                           pageIndex = 2;
+                          h1 = false;
+                          h2 = false;
+                          h3 = true;
+                          h4 = false;
                           setState(() {});
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Icon(Icons.keyboard,
-                                size: 30, color: Color(0xff9e9ea0)),
+                          children: [
+                            Icon(Icons.account_circle_rounded,
+                                size: 30,
+                                color: h3
+                                    ? AppColors.bgcolor
+                                    : const Color(0xff9e9ea0)),
                             Text(
-                              "Key pad",
+                              "Profile",
+                              style: TextStyle(
+                                  color: h3
+                                      ? AppColors.bgcolor
+                                      : const Color(0xff9e9ea0)),
                             )
                           ],
                         )),
                     InkWell(
                         onTap: () {
                           pageIndex = 3;
+                          h1 = false;
+                          h2 = false;
+                          h3 = false;
+                          h4 = true;
                           setState(() {});
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
+                          children: [
                             Icon(Icons.settings,
-                                size: 30, color: Color(0xff9e9ea0)),
+                                size: 30,
+                                color: h4
+                                    ? AppColors.bgcolor
+                                    : const Color(0xff9e9ea0)),
                             Text(
                               "Setting",
+                              style: TextStyle(
+                                  color: h4
+                                      ? AppColors.bgcolor
+                                      : const Color(0xff9e9ea0)),
                             )
                           ],
                         )),

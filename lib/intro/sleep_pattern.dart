@@ -127,6 +127,8 @@ class _SleeppatternState extends State<Sleeppattern> {
                       ),
                       Buttton_Design(
                           ontap: () {
+                            databox.put("wakeup", _time.format(context));
+                            databox.put("bedtime", _time2.format(context));
                             routes("/PersonalInformtion", context);
                           },
                           text: "Next"),

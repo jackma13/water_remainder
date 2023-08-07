@@ -74,6 +74,7 @@ class _SelectNotificationState extends State<SelectNotification> {
                     ),
                     Buttton_Design(
                         ontap: () {
+                          databox.put("notifiaction", dropdownvalue);
                           routes("/Sleeppattern", context);
                         },
                         text: "Next"),

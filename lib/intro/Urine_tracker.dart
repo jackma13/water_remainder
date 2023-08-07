@@ -80,6 +80,7 @@ class _UrinetrackerState extends State<Urinetracker> {
                       ),
                       Buttton_Design(
                           ontap: () {
+                            databox.put("urinetracker", toggle);
                             routes("/SelectTemperature", context);
                           },
                           text: "Next"),

@@ -12,10 +12,10 @@ class _SelectplanState extends State<Selectplan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 137, 198, 247),
+      backgroundColor: const Color.fromARGB(255, 137, 198, 247),
       body: Column(
         children: [
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
           Image.asset(
             "assets/img_5.gif",
             height: heightD / 2.5,
@@ -53,7 +53,7 @@ class _SelectplanState extends State<Selectplan> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                              padding: EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
@@ -81,7 +81,7 @@ class _SelectplanState extends State<Selectplan> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
@@ -106,9 +106,11 @@ class _SelectplanState extends State<Selectplan> {
                   ),
                   Buttton_Design(
                       ontap: () {
-                        btn1 == null || btn2 == null
-                            ? showSnackBar(context, "Plese select any Option")
-                            : routes("/SelectGoals", context);
+                        if (btn1 == null || btn2 == null) {
+                          showSnackBar(context, "Plese select any Option");
+                        } else {
+                          routes("/SelectGoals", context);
+                        }
                       },
                       text: "Next"),
                   SizedBox(

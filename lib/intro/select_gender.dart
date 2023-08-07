@@ -109,10 +109,11 @@ class _SelectGenderState extends State<SelectGender> {
                       ),
                       Buttton_Design(
                           ontap: () {
-                            male == null || female == null
-                                ? showSnackBar(
-                                    context, "Plese select any Option")
-                                : routes("/MedicalInforamtion", context);
+                            if (male == null || female == null) {
+                              showSnackBar(context, "Plese select any Option");
+                            } else {
+                              routes("/MedicalInforamtion", context);
+                            }
                           },
                           text: "Next"),
                       SizedBox(
