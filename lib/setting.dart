@@ -16,6 +16,7 @@ class _SettingState extends State<Setting> {
   String date2 = DateFormat('MM-dd-yyyy').format(DateTime.now()).toString();
   TimeOfDay _time = const TimeOfDay(hour: 6, minute: 00);
   TimeOfDay _time2 = const TimeOfDay(hour: 22, minute: 00);
+
   void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -69,6 +70,17 @@ class _SettingState extends State<Setting> {
     toggle = databox.get("urinetracker");
     vibration = databox.get("vibration");
     _date = databox.get("birthday");
+    databox.get("notifiaction") == 30
+        ? dropdownvalue = items[0]
+        : databox.get("notifiaction") == 60
+            ? dropdownvalue = items[1]
+            : databox.get("notifiaction") == 120
+                ? dropdownvalue = items[2]
+                : databox.get("notifiaction") == 240
+                    ? dropdownvalue = items[3]
+                    : databox.get("notifiaction") == 360
+                        ? dropdownvalue = items[4]
+                        : dropdownvalue = items[4];
     sliderDiscreteValue = databox.get("activity");
     currentHorizontalIntValue = databox.get("Weight");
     super.initState();
@@ -277,20 +289,42 @@ class _SettingState extends State<Setting> {
                     Row(
                       children: [
                         Text(
-                          "Notification frequency    ",
+                          "Notification frequency",
                           style: heading4,
                         ),
-                        Expanded(
-                          child: Text(
-                            "${databox.get("notifiaction")} ",
-                            style: heading4,
-                          ),
+                        Expanded(child: SizedBox()),
+                        DropdownButton(
+                          underline: SizedBox(),
+                          style: heading4,
+                          value: dropdownvalue,
+                          icon: const Icon(Icons.arrow_forward_ios_outlined),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownvalue = newValue!;
+                              databox.put(
+                                  "notifiaction",
+                                  dropdownvalue == "Every 30 Minutes"
+                                      ? 30
+                                      : dropdownvalue == "Every 1 Hours"
+                                          ? 60
+                                          : dropdownvalue == "Every 2 Hours"
+                                              ? 120
+                                              : dropdownvalue == "Every 4 Hours"
+                                                  ? 240
+                                                  : dropdownvalue ==
+                                                          'Every 6 Hours'
+                                                      ? 360
+                                                      : 30);
+                            });
+                          },
                         ),
-                        icon
                       ],
-                    ),
-                    SizedBox(
-                      height: heightD * 0.02,
                     ),
                     const Divider(
                       thickness: 1,

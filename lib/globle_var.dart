@@ -5,6 +5,8 @@ import 'package:numberpicker/numberpicker.dart';
 double heightD = 0;
 double widthD = 0;
 int pageIndex = 0;
+int totaldrink = 0;
+String dates = "";
 bool? btn1;
 bool? btn2;
 bool h1 = true;
@@ -326,18 +328,41 @@ void showSnackBar(BuildContext context, value) {
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
 
+String dropdownvalue = 'Every 30 Minutes';
+var items = [
+  'Every 30 Minutes',
+  'Every 1 Hours',
+  'Every 2 Hours',
+  'Every 4 Hours',
+  'Every 6 Hours',
+];
 List watertype = [
-  {"name": "Water", "img": "water1.png"},
-  {"name": "Sparkling water", "img": "water2.png"},
-  {"name": "Mineral water", "img": "water3.png"},
-  {"name": "Soy Milk", "img": "water4.png"},
-  {"name": "Milk shake", "img": "water5.png"},
-  {"name": "Cow milk", "img": "water6.png"},
-  {"name": "Kefir", "img": "water7.png"},
-  {"name": "Lactose free milk", "img": "water8.png"},
-  {"name": "Coconut milk", "img": "water9.png"},
-  {"name": "ayran", "img": "water10.png"},
-  {"name": "Almond milk", "img": "water11.png"},
+  {"name": "Water", "img": "water1.png", "hydration": 100, "caffeine": 0},
+  {
+    "name": "Sparkling water",
+    "img": "water2.png",
+    "hydration": 100,
+    "caffeine": 0
+  },
+  {
+    "name": "Mineral water",
+    "img": "water3.png",
+    "hydration": 100,
+    "caffeine": 0
+  },
+  {"name": "Soy Milk", "img": "water4.png", "hydration": 90, "caffeine": 0},
+  {"name": "Milk shake", "img": "water5.png", "hydration": 68, "caffeine": 0},
+  {"name": "Cow milk", "img": "water6.png", "hydration": 88, "caffeine": 0},
+  {"name": "Kefir", "img": "water7.png", "hydration": 87, "caffeine": 0},
+  {
+    "name": "Lactose free milk",
+    "img": "water8.png",
+    "hydration": 88,
+    "caffeine": 0
+  },
+  {"name": "Coconut milk", "img": "water9.png", "hydration": 95, "caffeine": 0},
+  {"name": "ayran", "img": "water10.png", "hydration": 75, "caffeine": 0},
+  {"name": "Almond milk", "img": "water11.png", "hydration": 96, "caffeine": 0},
 ];
 List glasstype = [
   {"name": "Small glass", "img": "glass1.png"},
@@ -346,8 +371,61 @@ List glasstype = [
   {"name": "Bottle", "img": "glass4.png"},
   {"name": "Paper Cup", "img": "glass5.png"},
 ];
-
+int? urineindex;
 List mllist = [200, 240, 350, 475, 175];
+
+List urinelist = [
+  {
+    "color": const Color.fromARGB(255, 247, 243, 204),
+    "image": "assets/track1.png",
+    "type": "Hydrated",
+    "dis": "Congratulations! you are drinking enough water."
+  },
+  {
+    "color": const Color.fromARGB(255, 251, 243, 173),
+    "image": "assets/track1.png",
+    "type": "Hydrated",
+    "dis": "Congratulations! you are drinking enough water."
+  },
+  {
+    "color": const Color.fromARGB(255, 252, 243, 156),
+    "image": "assets/track2.png",
+    "type": "Mildly Dehydrated",
+    "dis": "You need to drink more water."
+  },
+  {
+    "color": const Color.fromARGB(255, 249, 236, 124),
+    "image": "assets/track2.png",
+    "type": "Mildly Dehydrated",
+    "dis": "You need to drink more water."
+  },
+  {
+    "color": const Color.fromARGB(255, 255, 239, 99),
+    "image": "assets/track3.png",
+    "type": "Very Dehydrated",
+    "dis": "Health risk! You are very dehydrated You need to drink more water."
+  },
+  {
+    "color": const Color.fromARGB(255, 241, 222, 55),
+    "image": "assets/track3.png",
+    "type": "Very Dehydrated",
+    "dis": "Health risk! You are very dehydrated You need to drink more water."
+  },
+  {
+    "color": const Color.fromARGB(255, 255, 235, 57),
+    "image": "assets/track4.png",
+    "type": "Severely Dehydrated",
+    "dis":
+        "Health risk! You are very severely dehydrated You need to drink more water."
+  },
+  {
+    "color": const Color.fromARGB(255, 210, 189, 3),
+    "image": "assets/track4.png",
+    "type": "Severely Dehydrated",
+    "dis":
+        "Health risk! You are very severely dehydrated You need to drink more water."
+  },
+];
 
 class Buttton_Design extends StatelessWidget {
   const Buttton_Design({

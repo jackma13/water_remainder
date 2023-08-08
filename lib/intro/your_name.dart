@@ -90,9 +90,13 @@ class _YournameState extends State<Yourname> {
                         Buttton_Design(
                             ontap: () {
                               if (_formKey.currentState!.validate()) {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
                                 databox.put("name", namecontroller.text);
                                 databox.put("vibration", true);
                                 databox.put("watergoal", 1200);
+                                databox.put("cupindex", 0);
+                                databox.put("cupml", mllist);
                                 routes("/Homenavigation", context);
                               }
                             },

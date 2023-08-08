@@ -9,14 +9,6 @@ class SelectNotification extends StatefulWidget {
 }
 
 class _SelectNotificationState extends State<SelectNotification> {
-  String dropdownvalue = 'Every 30 Minutes';
-  var items = [
-    'Every 30 Minutes',
-    'Every 1 Hours',
-    'Every 2 Hours',
-    'Every 4 Hours',
-    'Every 6 Hours',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +66,19 @@ class _SelectNotificationState extends State<SelectNotification> {
                     ),
                     Buttton_Design(
                         ontap: () {
-                          databox.put("notifiaction", dropdownvalue);
+                          databox.put(
+                              "notifiaction",
+                              dropdownvalue == "Every 30 Minutes"
+                                  ? 30
+                                  : dropdownvalue == "Every 1 Hours"
+                                      ? 60
+                                      : dropdownvalue == "Every 2 Hours"
+                                          ? 120
+                                          : dropdownvalue == "Every 4 Hours"
+                                              ? 240
+                                              : dropdownvalue == 'Every 6 Hours'
+                                                  ? 360
+                                                  : 30);
                           routes("/Sleeppattern", context);
                         },
                         text: "Next"),
