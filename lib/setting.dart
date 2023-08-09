@@ -103,7 +103,7 @@ class _SettingState extends State<Setting> {
         return exitapp(context);
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 221, 220, 220),
+        backgroundColor: const Color.fromARGB(255, 221, 220, 220),
         appBar: AppBar(
           title: Text(
             "Setting",
@@ -143,7 +143,7 @@ class _SettingState extends State<Setting> {
                               "Birthday",
                               style: heading4,
                             ),
-                            const Expanded(child: const SizedBox()),
+                            const Expanded(child: SizedBox()),
                             Text(
                               "${DateFormat('dd-mm-yyyy').format(databox.get("birthday"))} ",
                               style: heading4,
@@ -215,7 +215,7 @@ class _SettingState extends State<Setting> {
                               "Activity",
                               style: heading4,
                             ),
-                            const Expanded(child: const SizedBox()),
+                            const Expanded(child: SizedBox()),
                             Text(
                               sliderDiscreteValue == 0
                                   ? "Low"
@@ -296,9 +296,9 @@ class _SettingState extends State<Setting> {
                             "Notification frequency",
                             style: heading4,
                           ),
-                          Expanded(child: SizedBox()),
+                          const Expanded(child: SizedBox()),
                           DropdownButton(
-                            underline: SizedBox(),
+                            underline: const SizedBox(),
                             style: heading4,
                             value: dropdownvalue,
                             icon: const Icon(Icons.arrow_forward_ios_outlined),
@@ -413,7 +413,7 @@ class _SettingState extends State<Setting> {
                             "Terms of use",
                             style: heading4,
                           ),
-                          const Expanded(child: const SizedBox()),
+                          const Expanded(child: SizedBox()),
                           icon
                         ],
                       ),
@@ -424,7 +424,7 @@ class _SettingState extends State<Setting> {
                             "Privacy Policy",
                             style: heading4,
                           ),
-                          const Expanded(child: const SizedBox()),
+                          const Expanded(child: SizedBox()),
                           icon
                         ],
                       ),

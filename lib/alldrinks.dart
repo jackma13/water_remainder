@@ -52,7 +52,7 @@ class _AllDrinksState extends State<AllDrinks> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                          width: 2, color: Color.fromARGB(255, 230, 230, 230))),
+                          width: 2, color: const Color.fromARGB(255, 230, 230, 230))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -117,7 +117,7 @@ class DrinkData extends StatelessWidget {
                           return DrinkMl(index: index);
                         });
                   },
-                  icon: Icon(Icons.arrow_forward_ios))
+                  icon: const Icon(Icons.arrow_forward_ios))
             ],
           ),
           SizedBox(

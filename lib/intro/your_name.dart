@@ -18,7 +18,7 @@ class _YournameState extends State<Yourname> {
         return exitapp(context);
       },
       child: Scaffold(
-          backgroundColor: Color(0xffddf0f6),
+          backgroundColor: const Color(0xffddf0f6),
           body: SingleChildScrollView(
             child: Column(
               children: [

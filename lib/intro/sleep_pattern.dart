@@ -42,7 +42,7 @@ class _SleeppatternState extends State<Sleeppattern> {
         return exitapp(context);
       },
       child: Scaffold(
-          backgroundColor: Color(0xffc5e2ff),
+          backgroundColor: const Color(0xffc5e2ff),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -83,16 +83,14 @@ class _SleeppatternState extends State<Sleeppattern> {
                                 onTap: () {
                                   _selectTime();
                                 },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        _time.format(context),
-                                        style: heading2,
-                                      ),
-                                      Icon(Icons.arrow_drop_down)
-                                    ],
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      _time.format(context),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
                                 ),
                               )
                             ],
@@ -111,16 +109,14 @@ class _SleeppatternState extends State<Sleeppattern> {
                                 onTap: () {
                                   _selectTime2();
                                 },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        _time2.format(context),
-                                        style: heading2,
-                                      ),
-                                      Icon(Icons.arrow_drop_down)
-                                    ],
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      _time2.format(context),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
                                 ),
                               )
                             ],

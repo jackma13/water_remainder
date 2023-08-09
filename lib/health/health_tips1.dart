@@ -45,7 +45,7 @@ class _Healthtips1State extends State<Healthtips1> {
                       },
                       child: CircleAvatar(
                           backgroundColor: AppColors.bgcolor,
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ))),

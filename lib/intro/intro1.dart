@@ -40,24 +40,22 @@ class _Intro1State extends State<Intro1> {
                   ),
                 ],
               ),
-              Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "Most bodily functions depend on water, which makes up between 60% and 70% of your body weight.",
-                      textAlign: TextAlign.center,
-                      style: normaltext,
-                    ),
-                    SizedBox(
-                      height: heightD * 0.02,
-                    ),
-                    Text(
-                      "It participates in the delivery of food to the cells as well as its digestion and absorption. It keeps cells, tissues, organs, and systems running smoothly.",
-                      textAlign: TextAlign.center,
-                      style: normaltext,
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text(
+                    "Most bodily functions depend on water, which makes up between 60% and 70% of your body weight.",
+                    textAlign: TextAlign.center,
+                    style: normaltext,
+                  ),
+                  SizedBox(
+                    height: heightD * 0.02,
+                  ),
+                  Text(
+                    "It participates in the delivery of food to the cells as well as its digestion and absorption. It keeps cells, tissues, organs, and systems running smoothly.",
+                    textAlign: TextAlign.center,
+                    style: normaltext,
+                  ),
+                ],
               ),
               Buttton_Design(
                 ontap: () {

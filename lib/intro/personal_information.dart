@@ -82,16 +82,14 @@ class _PersonalInformtionState extends State<PersonalInformtion> {
                               ),
                               InkWell(
                                 onTap: _selectDate,
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        date2.toString(),
-                                        style: heading2,
-                                      ),
-                                      const Icon(Icons.arrow_drop_down)
-                                    ],
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      date2.toString(),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
                                 ),
                               )
                             ],
@@ -115,16 +113,14 @@ class _PersonalInformtionState extends State<PersonalInformtion> {
                                       });
                                   setState(() {});
                                 },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        currentHorizontalIntValue.toString(),
-                                        style: heading2,
-                                      ),
-                                      const Icon(Icons.arrow_drop_down)
-                                    ],
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      currentHorizontalIntValue.toString(),
+                                      style: heading2,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down)
+                                  ],
                                 ),
                               )
                             ],

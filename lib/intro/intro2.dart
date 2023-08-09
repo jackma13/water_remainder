@@ -38,24 +38,22 @@ class _Intro2State extends State<Intro2> {
                   ),
                 ],
               ),
-              Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "Water affects the movement and elimination of toxic compounds produced by metabolism, the regulation of body temperature, and the lubrication of joints",
-                      textAlign: TextAlign.center,
-                      style: normaltext,
-                    ),
-                    SizedBox(
-                      height: heightD * 0.02,
-                    ),
-                    Text(
-                      "Water equilibrium in our bodies is achieved by replacing lost water with water consumed with drinks and food.",
-                      textAlign: TextAlign.center,
-                      style: normaltext,
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text(
+                    "Water affects the movement and elimination of toxic compounds produced by metabolism, the regulation of body temperature, and the lubrication of joints",
+                    textAlign: TextAlign.center,
+                    style: normaltext,
+                  ),
+                  SizedBox(
+                    height: heightD * 0.02,
+                  ),
+                  Text(
+                    "Water equilibrium in our bodies is achieved by replacing lost water with water consumed with drinks and food.",
+                    textAlign: TextAlign.center,
+                    style: normaltext,
+                  ),
+                ],
               ),
               Buttton_Design(
                   ontap: () {

@@ -113,10 +113,10 @@ class _HomeState extends State<Home> {
                         routes("/HomeUrinetacker", context);
                       },
                       child: Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Color.fromRGBO(250, 234, 106, 1)),
+                            color: const Color.fromRGBO(250, 234, 106, 1)),
                         child: Row(
                           children: [
                             SizedBox(width: widthD * 0.01),
@@ -248,7 +248,7 @@ class _HomeState extends State<Home> {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: CircleAvatar(
-                                          backgroundColor: Color.fromARGB(
+                                          backgroundColor: const Color.fromARGB(
                                               255, 225, 224, 224),
                                           child: Icon(Icons.add,
                                               color: AppColors.bgcolor),

@@ -10,7 +10,6 @@ import 'package:water_remainder/globle_var.dart';
 import 'package:water_remainder/health/health_tips1.dart';
 import 'package:water_remainder/health/health_tips2.dart';
 import 'package:water_remainder/health/health_tips3.dart';
-import 'package:water_remainder/home.dart';
 import 'package:water_remainder/home_navigation.dart';
 import 'package:water_remainder/home_urine_tracker.dart';
 import 'package:water_remainder/intro/Select_goals.dart';

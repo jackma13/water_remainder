@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:water_remainder/globle_var.dart';
 
@@ -67,7 +69,7 @@ class _UrinetrackerState extends State<Urinetracker> {
                               child: Switch(
                                 value: toggle,
                                 activeTrackColor:
-                                    Color.fromARGB(255, 50, 34, 149),
+                                    const Color.fromARGB(255, 50, 34, 149),
                                 inactiveThumbColor: Colors.white,
                                 activeColor: Colors.white,
                                 // activeColor: Colors.green,

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:water_remainder/globle_var.dart';
 
@@ -16,7 +18,7 @@ class _SelectNotificationState extends State<SelectNotification> {
         return exitapp(context);
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 190, 228, 251),
+        backgroundColor: const Color.fromARGB(255, 190, 228, 251),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

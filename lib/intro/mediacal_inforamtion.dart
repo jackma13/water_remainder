@@ -64,7 +64,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 220, 219, 219),
+                                    color: const Color.fromARGB(255, 220, 219, 219),
                                     borderRadius: BorderRadius.circular(100)),
                                 child: Row(
                                   children: [
@@ -75,7 +75,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                         setState(() {});
                                       },
                                       child: Container(
-                                          padding: EdgeInsets.all(8),
+                                          padding: const EdgeInsets.all(8),
                                           decoration: BoxDecoration(
                                               color: bt1
                                                   ? const Color(0xffb5b7dd)
@@ -97,7 +97,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                         setState(() {});
                                       },
                                       child: Container(
-                                          padding: EdgeInsets.all(8),
+                                          padding: const EdgeInsets.all(8),
                                           decoration: BoxDecoration(
                                               color: bt2
                                                   ? const Color(0xffb5b7dd)
@@ -133,7 +133,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 220, 219, 219),
                                           borderRadius:
                                               BorderRadius.circular(100)),
@@ -146,7 +146,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                               setState(() {});
                                             },
                                             child: Container(
-                                                padding: EdgeInsets.all(8),
+                                                padding: const EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                     color: bt3
                                                         ? const Color(
@@ -170,7 +170,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                               setState(() {});
                                             },
                                             child: Container(
-                                                padding: EdgeInsets.all(8),
+                                                padding: const EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                     color: bt4
                                                         ? const Color(
@@ -193,7 +193,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
                                   ],
                                 ),
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
                         SizedBox(
                           height: heightD * 0.02,
                         ),

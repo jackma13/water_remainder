@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -57,7 +59,7 @@ class _StatisticsState extends State<Statistics> {
         return exitapp(context);
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 211, 210, 210),
+        backgroundColor: const Color.fromARGB(255, 211, 210, 210),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
@@ -66,7 +68,7 @@ class _StatisticsState extends State<Statistics> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10)),
@@ -146,7 +148,7 @@ class _StatisticsState extends State<Statistics> {
                     height: heightD * 0.02,
                   ),
                   Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
@@ -167,7 +169,7 @@ class _StatisticsState extends State<Statistics> {
                                       Border.all(width: 2, color: Colors.grey),
                                   color: Colors.white),
                               child: GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: EdgeInsets.all(widthD * 0.03),
                                 itemCount: weeklist.length,
@@ -187,7 +189,7 @@ class _StatisticsState extends State<Statistics> {
                                         style: normaltext,
                                       ),
                                       Container(
-                                          padding: EdgeInsets.all(8),
+                                          padding: const EdgeInsets.all(8),
                                           decoration: BoxDecoration(
                                               color: DateFormat('dd').format(
                                                           DateTime.now()) ==
@@ -215,7 +217,7 @@ class _StatisticsState extends State<Statistics> {
                     height: heightD * 0.02,
                   ),
                   Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
@@ -234,14 +236,14 @@ class _StatisticsState extends State<Statistics> {
                             ),
                           ),
                           ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.all(widthD * 0.02),
                             itemCount: historybox.length,
                             itemBuilder: (context, index) {
                               var key = historybox.keys.toList();
                               var value = historybox.get(key[index]);
-                              print(value);
+
                               return Column(
                                 children: [
                                   Row(
