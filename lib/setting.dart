@@ -98,339 +98,345 @@ class _SettingState extends State<Setting> {
       Icons.arrow_forward_ios_outlined,
       size: 20,
     );
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 221, 220, 220),
-      appBar: AppBar(
-        title: Text(
-          "Setting",
-          style: heading,
+    return WillPopScope(
+      onWillPop: () {
+        return exitapp(context);
+      },
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 221, 220, 220),
+        appBar: AppBar(
+          title: Text(
+            "Setting",
+            style: heading,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: heightD * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Personal Setting",
-                style: normaltext.copyWith(color: AppColors.bgcolor),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: heightD * 0.02,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        _selectDate();
-                      },
-                      child: Row(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Personal Setting",
+                  style: normaltext.copyWith(color: AppColors.bgcolor),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          _selectDate();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Birthday",
+                              style: heading4,
+                            ),
+                            const Expanded(child: const SizedBox()),
+                            Text(
+                              "${DateFormat('dd-mm-yyyy').format(databox.get("birthday"))} ",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      ),
+                      divider,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return const SelectWeight();
+                              });
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Weight",
+                              style: heading4,
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "${databox.get("Weight")} kg ",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      ),
+                      divider,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return const WaterGoals();
+                              });
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Water Goal",
+                              style: heading4,
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "${databox.get("watergoal")} ml ",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      ),
+                      divider,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return const SelectActivity();
+                              });
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Activity",
+                              style: heading4,
+                            ),
+                            const Expanded(child: const SizedBox()),
+                            Text(
+                              sliderDiscreteValue == 0
+                                  ? "Low"
+                                  : sliderDiscreteValue == 50.0
+                                      ? "Medium"
+                                      : sliderDiscreteValue == 100.0
+                                          ? "High"
+                                          : "High",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      ),
+                      divider,
+                      InkWell(
+                        onTap: () {
+                          _selectTime();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Wake-up Time",
+                              style: heading4,
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "${databox.get("wakeup")}",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      ),
+                      divider,
+                      InkWell(
+                        onTap: () {
+                          _selectTime2();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Bedtime",
+                              style: heading4,
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "${databox.get("bedtime")}",
+                              style: heading4,
+                            ),
+                            icon
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Notification Setting",
+                  style: normaltext.copyWith(color: AppColors.bgcolor),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white),
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
                           Text(
-                            "Birthday",
+                            "Notification frequency",
+                            style: heading4,
+                          ),
+                          Expanded(child: SizedBox()),
+                          DropdownButton(
+                            underline: SizedBox(),
+                            style: heading4,
+                            value: dropdownvalue,
+                            icon: const Icon(Icons.arrow_forward_ios_outlined),
+                            items: items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownvalue = newValue!;
+                                databox.put(
+                                    "notifiaction",
+                                    dropdownvalue == "Every 30 Minutes"
+                                        ? 30
+                                        : dropdownvalue == "Every 1 Hours"
+                                            ? 60
+                                            : dropdownvalue == "Every 2 Hours"
+                                                ? 120
+                                                : dropdownvalue ==
+                                                        "Every 4 Hours"
+                                                    ? 240
+                                                    : dropdownvalue ==
+                                                            'Every 6 Hours'
+                                                        ? 360
+                                                        : 30);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        thickness: 1,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Urine Tracker",
+                            style: heading4,
+                          ),
+                          const Expanded(child: SizedBox()),
+                          Transform.scale(
+                            scale: 1.5,
+                            child: Switch(
+                              value: toggle,
+                              activeTrackColor: AppColors.bgcolor,
+                              inactiveThumbColor: Colors.white,
+                              activeColor: Colors.white,
+                              // activeColor: Colors.green,
+                              onChanged: (bool value) {
+                                toggle = !toggle;
+                                setState(() {});
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "App Setting",
+                  style: normaltext.copyWith(color: AppColors.bgcolor),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "App Vibration",
+                            style: heading4,
+                          ),
+                          const Expanded(child: SizedBox()),
+                          Transform.scale(
+                            scale: 1.5,
+                            child: Switch(
+                              value: vibration,
+                              activeTrackColor: AppColors.bgcolor,
+                              inactiveThumbColor: Colors.white,
+                              activeColor: Colors.white,
+                              // activeColor: Colors.green,
+                              onChanged: (bool value) {
+                                vibration = !vibration;
+                                databox.put("vibration", vibration);
+                                setState(() {});
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        thickness: 1,
+                      ),
+                      SizedBox(
+                        height: heightD * 0.02,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Terms of use",
                             style: heading4,
                           ),
                           const Expanded(child: const SizedBox()),
-                          Text(
-                            "${DateFormat('dd-mm-yyyy').format(databox.get("birthday"))} ",
-                            style: heading4,
-                          ),
                           icon
                         ],
                       ),
-                    ),
-                    divider,
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return const SelectWeight();
-                            });
-                      },
-                      child: Row(
+                      divider,
+                      Row(
                         children: [
                           Text(
-                            "Weight",
-                            style: heading4,
-                          ),
-                          const Expanded(child: SizedBox()),
-                          Text(
-                            "${databox.get("Weight")} kg ",
-                            style: heading4,
-                          ),
-                          icon
-                        ],
-                      ),
-                    ),
-                    divider,
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return const WaterGoals();
-                            });
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            "Water Goal",
-                            style: heading4,
-                          ),
-                          const Expanded(child: SizedBox()),
-                          Text(
-                            "${databox.get("watergoal")} ml ",
-                            style: heading4,
-                          ),
-                          icon
-                        ],
-                      ),
-                    ),
-                    divider,
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return const SelectActivity();
-                            });
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            "Activity",
+                            "Privacy Policy",
                             style: heading4,
                           ),
                           const Expanded(child: const SizedBox()),
-                          Text(
-                            sliderDiscreteValue == 0
-                                ? "Low"
-                                : sliderDiscreteValue == 50.0
-                                    ? "Medium"
-                                    : sliderDiscreteValue == 100.0
-                                        ? "High"
-                                        : "High",
-                            style: heading4,
-                          ),
                           icon
                         ],
                       ),
-                    ),
-                    divider,
-                    InkWell(
-                      onTap: () {
-                        _selectTime();
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            "Wake-up Time",
-                            style: heading4,
-                          ),
-                          const Expanded(child: SizedBox()),
-                          Text(
-                            "${databox.get("wakeup")}",
-                            style: heading4,
-                          ),
-                          icon
-                        ],
-                      ),
-                    ),
-                    divider,
-                    InkWell(
-                      onTap: () {
-                        _selectTime2();
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            "Bedtime",
-                            style: heading4,
-                          ),
-                          const Expanded(child: SizedBox()),
-                          Text(
-                            "${databox.get("bedtime")}",
-                            style: heading4,
-                          ),
-                          icon
-                        ],
-                      ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Notification Setting",
-                style: normaltext.copyWith(color: AppColors.bgcolor),
+              SizedBox(
+                height: heightD * 0.05,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Notification frequency",
-                          style: heading4,
-                        ),
-                        Expanded(child: SizedBox()),
-                        DropdownButton(
-                          underline: SizedBox(),
-                          style: heading4,
-                          value: dropdownvalue,
-                          icon: const Icon(Icons.arrow_forward_ios_outlined),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownvalue = newValue!;
-                              databox.put(
-                                  "notifiaction",
-                                  dropdownvalue == "Every 30 Minutes"
-                                      ? 30
-                                      : dropdownvalue == "Every 1 Hours"
-                                          ? 60
-                                          : dropdownvalue == "Every 2 Hours"
-                                              ? 120
-                                              : dropdownvalue == "Every 4 Hours"
-                                                  ? 240
-                                                  : dropdownvalue ==
-                                                          'Every 6 Hours'
-                                                      ? 360
-                                                      : 30);
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 1,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Urine Tracker",
-                          style: heading4,
-                        ),
-                        const Expanded(child: SizedBox()),
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Switch(
-                            value: toggle,
-                            activeTrackColor: AppColors.bgcolor,
-                            inactiveThumbColor: Colors.white,
-                            activeColor: Colors.white,
-                            // activeColor: Colors.green,
-                            onChanged: (bool value) {
-                              toggle = !toggle;
-                              setState(() {});
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "App Setting",
-                style: normaltext.copyWith(color: AppColors.bgcolor),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "App Vibration",
-                          style: heading4,
-                        ),
-                        const Expanded(child: SizedBox()),
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Switch(
-                            value: vibration,
-                            activeTrackColor: AppColors.bgcolor,
-                            inactiveThumbColor: Colors.white,
-                            activeColor: Colors.white,
-                            // activeColor: Colors.green,
-                            onChanged: (bool value) {
-                              vibration = !vibration;
-                              databox.put("vibration", vibration);
-                              setState(() {});
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 1,
-                    ),
-                    SizedBox(
-                      height: heightD * 0.02,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Terms of use",
-                          style: heading4,
-                        ),
-                        const Expanded(child: const SizedBox()),
-                        icon
-                      ],
-                    ),
-                    divider,
-                    Row(
-                      children: [
-                        Text(
-                          "Privacy Policy",
-                          style: heading4,
-                        ),
-                        const Expanded(child: const SizedBox()),
-                        icon
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: heightD * 0.05,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

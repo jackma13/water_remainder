@@ -12,61 +12,67 @@ class Allcup extends StatefulWidget {
 class _AllcupState extends State<Allcup> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: GridView.builder(
-          shrinkWrap: true,
-          padding: EdgeInsets.all(widthD * 0.03),
-          itemCount: glasstype.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                indexs = index;
-                showModalBottomSheet(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20))),
-                    elevation: 0,
-                    context: context,
-                    builder: (context) {
-                      return Changeml();
-                    });
-                setState(() {});
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        width: 2,
-                        color: databox.get("cupindex") == index
-                            ? AppColors.bgcolor
-                            : const Color.fromARGB(255, 230, 230, 230))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      "assets/${glasstype[index]["img"]}",
-                      height: heightD / 8,
-                    ),
-                    Text(
-                      glasstype[index]["name"],
-                      style: heading4,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      "${mllist[index]} ml",
-                      style: normaltext,
-                      textAlign: TextAlign.center,
-                    )
-                  ],
+    return WillPopScope(
+      onWillPop: () {
+        routes("/Homenavigation", context);
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: GridView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.all(widthD * 0.03),
+            itemCount: glasstype.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  indexs = index;
+                  showModalBottomSheet(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      elevation: 0,
+                      context: context,
+                      builder: (context) {
+                        return Changeml();
+                      });
+                  setState(() {});
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          width: 2,
+                          color: databox.get("cupindex") == index
+                              ? AppColors.bgcolor
+                              : const Color.fromARGB(255, 230, 230, 230))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        "assets/${glasstype[index]["img"]}",
+                        height: heightD / 8,
+                      ),
+                      Text(
+                        glasstype[index]["name"],
+                        style: heading4,
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "${mllist[index]} ml",
+                        style: normaltext,
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:intl/intl.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:water_remainder/globle_var.dart';
 import 'package:water_remainder/notification_service.dart';
@@ -14,56 +15,62 @@ class AllDrinks extends StatefulWidget {
 class _AllDrinksState extends State<AllDrinks> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: GridView.builder(
-          shrinkWrap: true,
-          padding: EdgeInsets.all(widthD * 0.03),
-          itemCount: watertype.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: .9,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 3),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20))),
-                    elevation: 0,
-                    context: context,
-                    builder: (context) {
-                      return DrinkData(
-                        index: index,
-                      );
-                    });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        width: 2, color: Color.fromARGB(255, 230, 230, 230))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      "assets/${watertype[index]["img"]}",
-                      height: heightD / 10,
-                    ),
-                    Text(
-                      watertype[index]["name"],
-                      style: normaltext,
-                      textAlign: TextAlign.center,
-                    )
-                  ],
+    return WillPopScope(
+      onWillPop: () {
+        routes("/Homenavigation", context);
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: GridView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.all(widthD * 0.03),
+            itemCount: watertype.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: .9,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3),
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      elevation: 0,
+                      context: context,
+                      builder: (context) {
+                        return DrinkData(
+                          index: index,
+                        );
+                      });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          width: 2, color: Color.fromARGB(255, 230, 230, 230))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        "assets/${watertype[index]["img"]}",
+                        height: heightD / 10,
+                      ),
+                      Text(
+                        watertype[index]["name"],
+                        style: normaltext,
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }
@@ -156,7 +163,12 @@ class DrinkData extends StatelessWidget {
                     "totaldrink", totaldrink + mllist[databox.get("cupindex")]);
                 totaldrink = databox.get("totaldrink");
                 databox.put("time", dates);
-
+                historybox
+                    .put(DateTime.now().microsecondsSinceEpoch.toString(), {
+                  "name": watertype[index]["name"],
+                  "ml": mllist[databox.get("cupindex")],
+                  "date": DateFormat('MM-dd').format(DateTime.now()),
+                });
                 Navigator.pop(context);
               },
               text: "Drink Now"),

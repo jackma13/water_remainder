@@ -7,6 +7,9 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:water_remainder/all_cup.dart';
 import 'package:water_remainder/alldrinks.dart';
 import 'package:water_remainder/globle_var.dart';
+import 'package:water_remainder/health/health_tips1.dart';
+import 'package:water_remainder/health/health_tips2.dart';
+import 'package:water_remainder/health/health_tips3.dart';
 import 'package:water_remainder/home.dart';
 import 'package:water_remainder/home_navigation.dart';
 import 'package:water_remainder/home_urine_tracker.dart';
@@ -29,6 +32,7 @@ void main() async {
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   await Hive.openBox("personaldata");
+  await Hive.openBox("history");
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
@@ -57,6 +61,9 @@ class MyApp extends StatelessWidget {
           "/AllDrinks": (context) => const AllDrinks(),
           "/Allcup": (context) => const Allcup(),
           "/HomeUrinetacker": (context) => const HomeUrinetacker(),
+          "/Healthtips3": (context) => const Healthtips3(),
+          "/Healthtips1": (context) => const Healthtips1(),
+          "/Healthtips2": (context) => const Healthtips2(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

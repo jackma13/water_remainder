@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -11,10 +13,10 @@ bool? btn1;
 bool? btn2;
 bool h1 = true;
 bool h2 = false;
-bool h3 = false;
 bool h4 = false;
 bool edit = false;
 final databox = Hive.box("personaldata");
+final historybox = Hive.box("history");
 double sliderDiscreteValue = 0;
 
 class SelectActivity extends StatefulWidget {
@@ -456,4 +458,83 @@ class Buttton_Design extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<bool> exitapp(context) async {
+  return await showDialog(
+          context: context,
+          builder: (context) => SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Container(
+                  width: 350,
+                  height: 420,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Material(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    child: Padding(
+                      padding: EdgeInsets.all(widthD / 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/splash.png",
+                            height: widthD / 4,
+                          ),
+                          Text(
+                            "Are you sure want to exit app?",
+                            textAlign: TextAlign.center,
+                            style: heading4,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  exit(0);
+                                },
+                                child: Container(
+                                  width: widthD / 5,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: AppColors.bgcolor),
+                                  child: Center(
+                                      child: Text(
+                                    "Yes",
+                                    style: heading3,
+                                  )),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  width: widthD / 5,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: AppColors.bgcolor),
+                                  child: Center(
+                                      child: Text(
+                                    "No",
+                                    style: heading3,
+                                  )),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ))) ??
+      false;
 }
