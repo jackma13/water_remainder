@@ -112,11 +112,32 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         routes("/HomeUrinetacker", context);
                       },
-                      child: Text(
-                        databox.get("urineindex") == null
-                            ? "Select Urine Color"
-                            : urinelist[databox.get("urineindex")]["type"],
-                        style: heading,
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: Color.fromRGBO(250, 234, 106, 1)),
+                        child: Row(
+                          children: [
+                            SizedBox(width: widthD * 0.01),
+                            Image.asset(
+                              databox.get("urineindex") == null
+                                  ? "assets/splash.png"
+                                  : urinelist[databox.get("urineindex")]
+                                      ["image"],
+                              height: heightD / 30,
+                            ),
+                            SizedBox(width: widthD * 0.01),
+                            Text(
+                              databox.get("urineindex") == null
+                                  ? "Select Urine Color"
+                                  : urinelist[databox.get("urineindex")]
+                                      ["type"],
+                              style: heading4.copyWith(fontSize: widthD / 25),
+                            ),
+                            SizedBox(width: widthD * 0.01),
+                          ],
+                        ),
                       ))
                 ],
               ),
@@ -144,7 +165,8 @@ class _HomeState extends State<Home> {
                               children: [
                                 Text(
                                   totaldrink.toString(),
-                                  style: heading.copyWith(fontSize: widthD / 10),
+                                  style:
+                                      heading.copyWith(fontSize: widthD / 10),
                                 ),
                                 InkWell(
                                   onTap: () {
@@ -163,7 +185,7 @@ class _HomeState extends State<Home> {
                         )),
                   ),
                   SizedBox(
-                    height: heightD / 4,
+                    height: heightD / 5,
                     child: PageView.builder(
                         controller: _controller,
                         itemCount: watertype.length,
@@ -226,8 +248,8 @@ class _HomeState extends State<Home> {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: CircleAvatar(
-                                          backgroundColor:
-                                              Color.fromARGB(255, 225, 224, 224),
+                                          backgroundColor: Color.fromARGB(
+                                              255, 225, 224, 224),
                                           child: Icon(Icons.add,
                                               color: AppColors.bgcolor),
                                         ),
@@ -291,7 +313,7 @@ class _HomeState extends State<Home> {
                       bottom: 2.5,
                       left: 2.5,
                       right: 2.5,
-                      radius: BorderRadius.circular(20),
+                      radius: BorderRadius.circular(100),
                     ),
                     pageController: _controller,
                   ),

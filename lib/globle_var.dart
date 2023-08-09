@@ -402,7 +402,7 @@ List urinelist = [
     "dis": "You need to drink more water."
   },
   {
-    "color": const Color.fromARGB(255, 255, 239, 99),
+    "color": Color.fromARGB(255, 250, 235, 102),
     "image": "assets/track3.png",
     "type": "Very Dehydrated",
     "dis": "Health risk! You are very dehydrated You need to drink more water."
@@ -414,14 +414,14 @@ List urinelist = [
     "dis": "Health risk! You are very dehydrated You need to drink more water."
   },
   {
-    "color": const Color.fromARGB(255, 255, 235, 57),
+    "color": Color.fromARGB(255, 210, 193, 45),
     "image": "assets/track4.png",
     "type": "Severely Dehydrated",
     "dis":
         "Health risk! You are very severely dehydrated You need to drink more water."
   },
   {
-    "color": const Color.fromARGB(255, 210, 189, 3),
+    "color": Color.fromARGB(255, 165, 149, 3),
     "image": "assets/track4.png",
     "type": "Severely Dehydrated",
     "dis":
