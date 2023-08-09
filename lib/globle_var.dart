@@ -484,7 +484,7 @@ Future<bool> exitapp(context) async {
                         children: <Widget>[
                           Image.asset(
                             "assets/splash.png",
-                            height: widthD / 4,
+                            height: widthD * 0.4,
                           ),
                           Text(
                             "Are you sure want to exit app?",
@@ -499,15 +499,15 @@ Future<bool> exitapp(context) async {
                                   exit(0);
                                 },
                                 child: Container(
-                                  width: widthD / 5,
-                                  padding: const EdgeInsets.all(10),
+                                  width: widthD / 4,
+                                  padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
                                       color: AppColors.bgcolor),
                                   child: Center(
                                       child: Text(
                                     "Yes",
-                                    style: heading3,
+                                    style: normaltext2,
                                   )),
                                 ),
                               ),
@@ -516,15 +516,15 @@ Future<bool> exitapp(context) async {
                                   Navigator.pop(context);
                                 },
                                 child: Container(
-                                  width: widthD / 5,
-                                  padding: const EdgeInsets.all(10),
+                                  width: widthD / 4,
+                                  padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
                                       color: AppColors.bgcolor),
                                   child: Center(
                                       child: Text(
                                     "No",
-                                    style: heading3,
+                                    style: normaltext2,
                                   )),
                                 ),
                               ),
