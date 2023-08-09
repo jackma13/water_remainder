@@ -101,12 +101,13 @@ class _StatisticsState extends State<Statistics> {
                         ),
                         Center(
                           child: LinearPercentIndicator(
-                            width: widthD / 1.1,
                             animation: true,
                             animationDuration: 500,
                             lineHeight: heightD * 0.025,
                             percent: totaldrink /
-                                        databox.get("watergoal").roundToDouble() <
+                                        databox
+                                            .get("watergoal")
+                                            .roundToDouble() <
                                     1.0
                                 ? totaldrink /
                                     databox.get("watergoal").roundToDouble()
@@ -128,8 +129,8 @@ class _StatisticsState extends State<Statistics> {
                             children: [
                               Text(
                                 "See health tips",
-                                style:
-                                    normaltext.copyWith(color: AppColors.bgcolor),
+                                style: normaltext.copyWith(
+                                    color: AppColors.bgcolor),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -154,7 +155,8 @@ class _StatisticsState extends State<Statistics> {
                         children: [
                           Text(
                             DateFormat.yMMMMd().format(now),
-                            style: normaltext.copyWith(color: AppColors.bgcolor),
+                            style:
+                                normaltext.copyWith(color: AppColors.bgcolor),
                           ),
                           SizedBox(
                             height: heightD * 0.01,
@@ -222,7 +224,8 @@ class _StatisticsState extends State<Statistics> {
                         children: [
                           Text(
                             "History",
-                            style: normaltext.copyWith(color: AppColors.bgcolor),
+                            style:
+                                normaltext.copyWith(color: AppColors.bgcolor),
                           ),
                           const Padding(
                             padding: EdgeInsets.all(8.0),
