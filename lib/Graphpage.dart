@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:water_remainder/globle_var.dart';
@@ -13,6 +15,7 @@ class Graphpage extends StatefulWidget {
 
 class _GraphpageState extends State<Graphpage> {
   DateTime now = DateTime.now();
+  // ignore: prefer_typing_uninitialized_variables
   var show;
   List<charts.Series<DeveloperSeries, String>> seriesList = [];
   bool monthbool = true;
@@ -221,7 +224,7 @@ class _GraphpageState extends State<Graphpage> {
       year: year,
       amount: nameC[j] == "ayran" ? iceGiants : 0,
       barColor: charts.ColorUtil.fromDartColor(
-        Color.fromARGB(255, 107, 251, 119),
+        const Color.fromARGB(255, 107, 251, 119),
       ),
       cat: "ayran",
     ));
@@ -229,7 +232,7 @@ class _GraphpageState extends State<Graphpage> {
       year: year,
       amount: nameC[j] == "Almond milk" ? iceGiants : 0,
       barColor: charts.ColorUtil.fromDartColor(
-        Color.fromARGB(255, 217, 116, 237),
+        const Color.fromARGB(255, 217, 116, 237),
       ),
       cat: "Almond milk",
     ));
@@ -346,6 +349,7 @@ class _GraphpageState extends State<Graphpage> {
                 show =
                     "${model.selectedSeries[0].measureFn(model.selectedDatum[0].index)} ${model.selectedSeries[0].data[model.selectedDatum[0].index!].cat}";
                 setState(() {});
+                // ignore: avoid_print
                 print(model.selectedSeries[0]
                     .measureFn(model.selectedDatum[0].index));
               }
@@ -400,7 +404,7 @@ class _GraphpageState extends State<Graphpage> {
                             setState(() {});
                           },
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 color: monthbool
                                     ? AppColors.bgcolor
@@ -424,7 +428,7 @@ class _GraphpageState extends State<Graphpage> {
                             setState(() {});
                           },
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 color:
                                     weekbool ? AppColors.bgcolor : Colors.white,
@@ -447,7 +451,7 @@ class _GraphpageState extends State<Graphpage> {
                               setState(() {});
                             },
                             child: Container(
-                              padding: EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                   color: daybool
                                       ? AppColors.bgcolor

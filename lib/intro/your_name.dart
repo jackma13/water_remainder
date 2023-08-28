@@ -23,7 +23,7 @@ class _YournameState extends State<Yourname> {
             child: Column(
               children: [
                 SizedBox(
-                  height: heightD * 0.06,
+                  height: heightD * 0.09,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

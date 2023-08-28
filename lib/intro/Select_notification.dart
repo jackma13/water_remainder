@@ -23,7 +23,9 @@ class _SelectNotificationState extends State<SelectNotification> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: heightD*0.06,),
+              SizedBox(
+                height: heightD * 0.09,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PhysicalModel(
@@ -84,7 +86,8 @@ class _SelectNotificationState extends State<SelectNotification> {
                                               ? 120
                                               : dropdownvalue == "Every 4 Hours"
                                                   ? 240
-                                                  : dropdownvalue == 'Every 6 Hours'
+                                                  : dropdownvalue ==
+                                                          'Every 6 Hours'
                                                       ? 360
                                                       : 30);
                               routes("/Sleeppattern", context);

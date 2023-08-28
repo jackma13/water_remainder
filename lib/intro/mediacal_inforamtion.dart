@@ -27,7 +27,7 @@ class _MedicalInforamtionState extends State<MedicalInforamtion> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  height: heightD * 0.06,
+                  height: heightD * 0.09,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
