@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:water_remainder/all_cup.dart';
 import 'package:water_remainder/alldrinks.dart';
 import 'package:water_remainder/globle_var.dart';
+import 'package:water_remainder/Graphpage.dart';
 import 'package:water_remainder/health/health_tips1.dart';
 import 'package:water_remainder/health/health_tips2.dart';
 import 'package:water_remainder/health/health_tips3.dart';
@@ -32,6 +33,7 @@ void main() async {
   Hive.init(appDocumentDirectory.path);
   await Hive.openBox("personaldata");
   await Hive.openBox("history");
+  await Hive.openBox("history2");
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
@@ -63,6 +65,8 @@ class MyApp extends StatelessWidget {
           "/Healthtips3": (context) => const Healthtips3(),
           "/Healthtips1": (context) => const Healthtips1(),
           "/Healthtips2": (context) => const Healthtips2(),
+          "/Graphpage": (context) => const Graphpage(),
+
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

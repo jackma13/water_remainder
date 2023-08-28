@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:water_remainder/globle_var.dart';
 
@@ -54,6 +55,7 @@ class _StatisticsState extends State<Statistics> {
             .format(now.subtract(Duration(days: now.weekday - 7)))
       },
     ];
+
     return WillPopScope(
       onWillPop: () {
         return exitapp(context);
@@ -67,6 +69,9 @@ class _StatisticsState extends State<Statistics> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: heightD * 0.02,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -155,10 +160,23 @@ class _StatisticsState extends State<Statistics> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            DateFormat.yMMMMd().format(now),
-                            style:
-                                normaltext.copyWith(color: AppColors.bgcolor),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                DateFormat.yMMMMd().format(now),
+                                style: normaltext.copyWith(
+                                    color: AppColors.bgcolor),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    routes("/Graphpage", context);
+                                  },
+                                  icon: Icon(
+                                    Icons.bar_chart,
+                                    color: AppColors.bgcolor,
+                                  ))
+                            ],
                           ),
                           SizedBox(
                             height: heightD * 0.01,

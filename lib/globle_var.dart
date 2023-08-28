@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:io';
-
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -19,6 +19,7 @@ bool h4 = false;
 bool edit = false;
 final databox = Hive.box("personaldata");
 final historybox = Hive.box("history");
+final historybox2 = Hive.box("history2");
 double sliderDiscreteValue = 0;
 
 class SelectActivity extends StatefulWidget {
@@ -539,4 +540,17 @@ Future<bool> exitapp(context) async {
                 ),
               ))) ??
       false;
+}
+class DeveloperSeries {
+  final String year;
+  final String cat;
+  final int amount;
+  final charts.Color barColor;
+
+  DeveloperSeries({
+    required this.year,
+    required this.amount,
+    required this.barColor,
+    required this.cat,
+  });
 }

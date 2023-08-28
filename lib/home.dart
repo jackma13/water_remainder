@@ -219,6 +219,17 @@ class _HomeState extends State<Home> {
                                           "date": DateFormat('MM-dd')
                                               .format(DateTime.now()),
                                         });
+                                    historybox2.put(
+                                        DateTime.now()
+                                            .microsecondsSinceEpoch
+                                            .toString(),
+                                        {
+                                          "name": watertype[index]["name"],
+                                          "ml": mllist[databox.get("cupindex")],
+                                          "date": DateFormat('MM-dd-yyyy')
+                                              .format(DateTime.now()),
+                                        });
+
                                     setState(() {});
                                   },
                                   child: Stack(
