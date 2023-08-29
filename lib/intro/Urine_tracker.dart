@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class Urinetracker extends StatefulWidget {
@@ -12,7 +14,41 @@ class Urinetracker extends StatefulWidget {
 
 class _UrinetrackerState extends State<Urinetracker> {
   bool toggle = true;
+   InterstitialAd? _interstitialAd;
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
   @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _loadInterstitialAd();
+  }
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -90,8 +126,11 @@ class _UrinetrackerState extends State<Urinetracker> {
                           ),
                           Buttton_Design(
                               ontap: () {
-                                databox.put("urinetracker", toggle);
-                                routes("/SelectTemperature", context);
+                                databox.put("urinetracker", toggle); if (_interstitialAd != null) {
+                    pagename = '/SelectTemperature';
+                    _interstitialAd?.show();
+                  } else {
+                                routes("/SelectTemperature", context);}
                               },
                               text: "Next"),
                           SizedBox(

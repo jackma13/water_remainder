@@ -21,7 +21,7 @@ final databox = Hive.box("personaldata");
 final historybox = Hive.box("history");
 final historybox2 = Hive.box("history2");
 double sliderDiscreteValue = 0;
-
+String pagename='';
 class SelectActivity extends StatefulWidget {
   const SelectActivity({Key? key}) : super(key: key);
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class Healthtips2 extends StatefulWidget {
@@ -8,7 +10,40 @@ class Healthtips2 extends StatefulWidget {
   State<Healthtips2> createState() => _Healthtips2State();
 }
 
-class _Healthtips2State extends State<Healthtips2> {
+class _Healthtips2State extends State<Healthtips2> {  InterstitialAd? _interstitialAd;
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _loadInterstitialAd();}
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -40,8 +75,11 @@ class _Healthtips2State extends State<Healthtips2> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
-                      onTap: () {
-                        routes("/Healthtips3", context);
+                      onTap: () { if (_interstitialAd != null) {
+                    pagename = '/Healthtips3';
+                    _interstitialAd?.show();
+                  } else {
+                        routes("/Healthtips3", context);}
                       },
                       child: CircleAvatar(
                           backgroundColor: AppColors.bgcolor,

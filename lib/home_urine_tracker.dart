@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class HomeUrinetacker extends StatefulWidget {
@@ -9,8 +11,66 @@ class HomeUrinetacker extends StatefulWidget {
 }
 
 class _HomeUrinetackerState extends State<HomeUrinetacker> {
+  InterstitialAd? _interstitialAd;
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+
+  loadbanner() {
+    _bannerAd = BannerAd(
+      adUnitId: banneradUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+    );
+  }
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
+    super.initState();
+    loadbanner();
+    _bannerAd.load();
+    _loadInterstitialAd();
+  
     databox.get("urineindex") == null
         ? totaldrink = 0
         : urineindex = databox.get("urineindex");
@@ -30,6 +90,16 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
             "Urine Tracker",
             style: heading4,
           ),
+        ),
+        bottomNavigationBar: SizedBox(
+          height: _bannerAd.size.height.toDouble(),
+          width: _bannerAd.size.width.toDouble(),
+          child: _isBannerAdReady
+              ? AdWidget(ad: _bannerAd)
+              : Center(
+                  child: Text("loading ads...",
+                      style: TextStyle(color: Colors.black)),
+                ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -113,8 +183,11 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
                 ),
                 Buttton_Design(
                     ontap: () {
-                      databox.put("urineindex", urineindex);
-                      routes("/Homenavigation", context);
+                      databox.put("urineindex", urineindex); if (_interstitialAd != null) {
+                    pagename = '/Homenavigation';
+                    _interstitialAd?.show();
+                  } else {
+                      routes("/Homenavigation", context);}
                     },
                     text: "Save Color"),
                 SizedBox(

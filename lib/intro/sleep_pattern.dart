@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class Sleeppattern extends StatefulWidget {
@@ -34,7 +36,41 @@ class _SleeppatternState extends State<Sleeppattern> {
       });
     }
   }
+  InterstitialAd? _interstitialAd;
 
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _loadInterstitialAd();
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -132,8 +168,11 @@ class _SleeppatternState extends State<Sleeppattern> {
                           Buttton_Design(
                               ontap: () {
                                 databox.put("wakeup", _time.format(context));
-                                databox.put("bedtime", _time2.format(context));
-                                routes("/PersonalInformtion", context);
+                                databox.put("bedtime", _time2.format(context)); if (_interstitialAd != null) {
+                    pagename = '/PersonalInformtion';
+                    _interstitialAd?.show();
+                  } else {
+                                routes("/PersonalInformtion", context);}
                               },
                               text: "Next"),
                           SizedBox(

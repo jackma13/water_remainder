@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class SelectGoals extends StatefulWidget {
@@ -16,8 +18,41 @@ class _SelectGoalsState extends State<SelectGoals> {
   bool g2 = false;
   bool g3 = false;
   bool g4 = false;
+  InterstitialAd? _interstitialAd;
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
+    _loadInterstitialAd();
+
     if (btn1 == true) {
       golls.addAll([
         ["Beauty", "assets/img_10.png"],
@@ -204,7 +239,12 @@ class _SelectGoalsState extends State<SelectGoals> {
                   ontap: () {
                     g1 == false && g2 == false && g3 == false && g4 == false
                         ? showSnackBar(context, "Plese select any Option")
-                        : routes("/SelectNotification", context);
+                        : _interstitialAd != null
+                            ? {
+                                pagename = '/SelectNotification',
+                                _interstitialAd?.show()
+                              }
+                            : routes("/SelectNotification", context);
                   },
                   text: "Next")
             ],

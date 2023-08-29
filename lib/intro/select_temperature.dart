@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class SelectTemperature extends StatefulWidget {
@@ -13,7 +15,41 @@ class _SelectTemperatureState extends State<SelectTemperature> {
   bool? c2;
   bool? c3;
   bool? c4;
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+
+  loadbanner() {
+    _bannerAd = BannerAd(
+      adUnitId: banneradUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+    );
+  }
+
   @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadbanner();
+    _bannerAd.load();
+  }
+
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -22,6 +58,16 @@ class _SelectTemperatureState extends State<SelectTemperature> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text("Select Your Goals"),
+          ),
+          bottomNavigationBar: SizedBox(
+            height: _bannerAd.size.height.toDouble(),
+            width: _bannerAd.size.width.toDouble(),
+            child: _isBannerAdReady
+                ? AdWidget(ad: _bannerAd)
+                : Center(
+                    child: Text("loading ads...",
+                        style: TextStyle(color: Colors.black)),
+                  ),
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +101,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            height: heightD / 4,
+                            height: heightD / 4.5,
                             width: widthD / 3,
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
@@ -74,7 +120,8 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                         SizedBox(
                           height: heightD * 0.01,
                         ),
-                        Text("Cold", textAlign: TextAlign.center, style: heading2)
+                        Text("Cold",
+                            textAlign: TextAlign.center, style: heading2)
                       ],
                     ),
                   ),
@@ -92,7 +139,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          height: heightD / 4,
+                          height: heightD / 4.5,
                           width: widthD / 3,
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -136,7 +183,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          height: heightD / 4,
+                          height: heightD / 4.5,
                           width: widthD / 3,
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -172,7 +219,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          height: heightD / 4,
+                          height: heightD / 4.5,
                           width: widthD / 3,
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -196,16 +243,15 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: heightD * 0.05,
-              ),
+              Spacer(),
               Buttton_Design(
                   ontap: () {
                     c1 == null || c2 == null || c3 == null || c4 == null
                         ? showSnackBar(context, "Plese select any Option")
                         : routes("/Yourname", context);
                   },
-                  text: "Next")
+                  text: "Next"),
+              Padding(padding: EdgeInsets.only(bottom: heightD * 0.02))
             ],
           )),
     );

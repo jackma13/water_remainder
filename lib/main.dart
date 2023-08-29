@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/all_cup.dart';
 import 'package:water_remainder/alldrinks.dart';
 import 'package:water_remainder/globle_var.dart';
@@ -26,8 +28,34 @@ import 'package:water_remainder/intro/select_temperature.dart';
 import 'package:water_remainder/intro/sleep_pattern.dart';
 import 'package:water_remainder/intro/your_name.dart';
 
-void main() async {
+AppOpenAd? openAd;
+
+Future<void> loadAd() async {
+  await AppOpenAd.load(
+      adUnitId: appopenad,
+      request: const AdRequest(),
+      adLoadCallback: AppOpenAdLoadCallback(onAdLoaded: (ad) {
+        print('ad is loaded');
+        openAd = ad;
+        openAd!.show();
+      }, onAdFailedToLoad: (error) {
+        print('ad failed to load $error');
+      }),
+      orientation: AppOpenAd.orientationPortrait);
+}
+
+void showAd() {
+  if (openAd == null) {
+    print('trying tto show before loading');
+    loadAd();
+    return;
+  }
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize();
+  await loadAd();
   Directory appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
@@ -66,7 +94,6 @@ class MyApp extends StatelessWidget {
           "/Healthtips1": (context) => const Healthtips1(),
           "/Healthtips2": (context) => const Healthtips2(),
           "/Graphpage": (context) => const Graphpage(),
-
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

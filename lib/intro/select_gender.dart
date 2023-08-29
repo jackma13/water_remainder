@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class SelectGender extends StatefulWidget {
@@ -11,7 +13,41 @@ class SelectGender extends StatefulWidget {
 class _SelectGenderState extends State<SelectGender> {
   bool? male;
   bool? female;
+  InterstitialAd? _interstitialAd;
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
   @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _loadInterstitialAd();
+  }
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -122,8 +158,11 @@ class _SelectGenderState extends State<SelectGender> {
                                 if (male == null || female == null) {
                                   showSnackBar(
                                       context, "Plese select any Option");
-                                } else {
-                                  routes("/MedicalInforamtion", context);
+                                } else { if (_interstitialAd != null) {
+                    pagename = '/MedicalInforamtion';
+                    _interstitialAd?.show();
+                  } else {
+                                  routes("/MedicalInforamtion", context);}
                                 }
                               },
                               text: "Next"),

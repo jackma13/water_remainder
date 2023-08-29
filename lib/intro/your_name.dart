@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:water_remainder/Adhelper.dart';
 import 'package:water_remainder/globle_var.dart';
 
 class Yourname extends StatefulWidget {
@@ -9,6 +11,42 @@ class Yourname extends StatefulWidget {
 }
 
 class _YournameState extends State<Yourname> {
+  InterstitialAd? _interstitialAd;
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialadUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Navigator.pushNamed(context, pagename);
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _loadInterstitialAd();
+  }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController namecontroller = TextEditingController();
   @override
@@ -101,7 +139,12 @@ class _YournameState extends State<Yourname> {
                                   databox.put("watergoal", 1200);
                                   databox.put("cupindex", 0);
                                   databox.put("cupml", mllist);
-                                  routes("/Homenavigation", context);
+                                  if (_interstitialAd != null) {
+                                    pagename = '/Homenavigation';
+                                    _interstitialAd?.show();
+                                  } else {
+                                    routes("/Homenavigation", context);
+                                  }
                                 }
                               },
                               text: "Create Plan"),
