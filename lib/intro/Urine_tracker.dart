@@ -19,7 +19,7 @@ class _UrinetrackerState extends State<Urinetracker> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -33,7 +33,7 @@ class _UrinetrackerState extends State<Urinetracker> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -47,8 +47,9 @@ class _UrinetrackerState extends State<Urinetracker> {
 
   @override
   void initState() {
+    super.initState();
     _loadInterstitialAd();
-  }
+  }@override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {

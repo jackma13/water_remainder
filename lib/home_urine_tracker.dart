@@ -27,7 +27,7 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
           });
         },
         onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
+          // print('Failed to load a banner ad: ${err.message}');
           ad.dispose();
         },
       ),
@@ -37,7 +37,7 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -51,7 +51,7 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -96,7 +96,7 @@ class _HomeUrinetackerState extends State<HomeUrinetacker> {
           width: _bannerAd.size.width.toDouble(),
           child: _isBannerAdReady
               ? AdWidget(ad: _bannerAd)
-              : Center(
+              : const Center(
                   child: Text("loading ads...",
                       style: TextStyle(color: Colors.black)),
                 ),

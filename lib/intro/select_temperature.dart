@@ -30,7 +30,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
           });
         },
         onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
+          // print('Failed to load a banner ad: ${err.message}');
           ad.dispose();
         },
       ),
@@ -50,6 +50,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
     _bannerAd.load();
   }
 
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -64,7 +65,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
             width: _bannerAd.size.width.toDouble(),
             child: _isBannerAdReady
                 ? AdWidget(ad: _bannerAd)
-                : Center(
+                : const Center(
                     child: Text("loading ads...",
                         style: TextStyle(color: Colors.black)),
                   ),
@@ -243,7 +244,7 @@ class _SelectTemperatureState extends State<SelectTemperature> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Buttton_Design(
                   ontap: () {
                     c1 == null || c2 == null || c3 == null || c4 == null

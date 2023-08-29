@@ -17,7 +17,7 @@ class _Intro2State extends State<Intro2> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -31,7 +31,7 @@ class _Intro2State extends State<Intro2> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -45,6 +45,7 @@ class _Intro2State extends State<Intro2> {
 
   @override
   void initState() {
+    super.initState();
     _loadInterstitialAd();
   }
 

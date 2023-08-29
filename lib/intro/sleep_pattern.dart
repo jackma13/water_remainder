@@ -41,7 +41,7 @@ class _SleeppatternState extends State<Sleeppattern> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -55,7 +55,7 @@ class _SleeppatternState extends State<Sleeppattern> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -69,6 +69,7 @@ class _SleeppatternState extends State<Sleeppattern> {
 
   @override
   void initState() {
+    super.initState();
     _loadInterstitialAd();
   }
   @override

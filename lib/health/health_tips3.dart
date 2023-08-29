@@ -16,7 +16,7 @@ class _Healthtips3State extends State<Healthtips3> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -30,7 +30,7 @@ class _Healthtips3State extends State<Healthtips3> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -44,6 +44,7 @@ class _Healthtips3State extends State<Healthtips3> {
 
   @override
   void initState() {
+    super.initState();
     _loadInterstitialAd();
   }
 

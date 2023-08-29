@@ -18,7 +18,7 @@ class _SelectGenderState extends State<SelectGender> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: interstitialadUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
@@ -32,7 +32,7 @@ class _SelectGenderState extends State<SelectGender> {
           });
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
+          // print('Failed to load an interstitial ad: ${err.message}');
         },
       ),
     );
@@ -46,8 +46,9 @@ class _SelectGenderState extends State<SelectGender> {
 
   @override
   void initState() {
+    super.initState();
     _loadInterstitialAd();
-  }
+  }@override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {

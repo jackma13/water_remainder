@@ -28,7 +28,7 @@ class _SelectplanState extends State<Selectplan> {
           });
         },
         onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
+          // print('Failed to load a banner ad: ${err.message}');
           ad.dispose();
         },
       ),
@@ -62,7 +62,7 @@ class _SelectplanState extends State<Selectplan> {
           width: _bannerAd.size.width.toDouble(),
           child: _isBannerAdReady
               ? AdWidget(ad: _bannerAd)
-              : Center(
+              : const Center(
                   child: Text("loading ads...",
                       style: TextStyle(color: Colors.black)),
                 ),
